@@ -1,0 +1,16 @@
+# Logical
+system                                                 /system                  ext4    ro,barrier=1                                         wait,slotselect,logical,first_stage_mount
+vendor                                                 /vendor                  ext4    ro,barrier=1                                         wait,slotselect,logical,first_stage_mount
+product                                                /product                 ext4    ro,barrier=1                                         wait,slotselect,logical,first_stage_mount
+
+# Metadata
+/dev/block/bootdevice/by-name/metadata                 /metadata                ext4    noatime,nosuid,nodev,discard                         wait,formattable,first_stage_mount
+
+# Userdata
+/dev/block/bootdevice/by-name/userdata                 /data                    f2fs    rw,discard,nosuid,nodev,noatime,nodiratime,quota,nobarrier,reserve_root=32768,resgid=1065   latemount,wait,check,formattable,fileencryption=ice:aes-256-cts,quota,reservedsize=128M,checkpoint=fs
+
+# Boot
+/dev/block/platform/bootdevice/by-name/boot            /boot                    emmc    defaults                                             slotselect
+
+# Misc
+/dev/block/bootdevice/by-name/misc                     /misc                    emmc    defaults                                             defaults
